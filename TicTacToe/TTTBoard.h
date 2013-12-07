@@ -12,4 +12,6 @@
 
 -(void)drawRect:(NSRect)dirtyRect;
 
+-(void)drawChess:(int)type xCord:(int)x yCord:(int)y;
+
 @end
