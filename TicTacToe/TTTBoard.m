@@ -97,8 +97,11 @@
     NSLog(@"x=%.2f y=%.2f i=%d j=%d\n", pntInView.x, pntInView.y, i, j);
     
     int k = j*3+i;
-    self.array[k] = [NSNumber numberWithInt:1];
-    [self setNeedsDisplay:YES];
+    
+    if ([self.array[k] intValue] == 0) {
+        self.array[k] = [NSNumber numberWithInt:1];
+        [self setNeedsDisplay:YES];
+    }
 }
 
 @end

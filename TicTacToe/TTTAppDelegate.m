@@ -12,7 +12,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSArray *temp = @[@1, @-1, @0, @0, @0, @0, @0, @0, @1];
+    NSArray *temp = @[@1, @-1, @0, @0, @0, @0, @0, @0, @0];
     self.array = [NSMutableArray arrayWithArray:temp];
     self.board.array = self.array;
     [self.board setNeedsDisplay: YES];
@@ -23,10 +23,8 @@
 }
 
 - (IBAction)restartPressed:(id)sender {
-    if ([self.array[0] intValue] == 1)
-        self.array[0] = [NSNumber numberWithInt:-1];
-    else
-        self.array[0] = [NSNumber numberWithInt:1];
+    for (int i=0; i<9; i++)
+        self.array[i] = [NSNumber numberWithInt:0];
 
     [self.board setNeedsDisplay: YES];
 }
