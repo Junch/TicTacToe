@@ -7,9 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TTTBoard.h"
 
 @interface TTTAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 
+@property (weak) IBOutlet TTTBoard *board;
+
+@property(strong) NSMutableArray* array;
+
+- (IBAction)restartPressed:(id)sender;
 @end

@@ -667,12 +667,16 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="13" name="STHeitiSC-Light"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="restartPressed:" target="494" id="VcB-sH-dMF"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
         </window>
         <customObject id="494" customClass="TTTAppDelegate">
             <connections>
+                <outlet property="board" destination="4v8-84-9Um" id="l4S-8O-kB3"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>

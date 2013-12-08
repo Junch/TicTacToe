@@ -37,10 +37,12 @@
     [feature setLineWidth: 4];
     [feature stroke];
     
-    // TODO: The following lines are just to test the drawChess method
-    // They will be replaced later
-    [self drawChess:0 xCord:0 yCord:0];
-    [self drawChess:1 xCord:2 yCord:1];
+    for (int i=0; i<9; i++) {
+        int x = i % 3;
+        int y = i / 3;
+        int type = [self.array[i] intValue];
+        [self drawChess:type xCord:x yCord:y];
+    }
     
     [NSGraphicsContext restoreGraphicsState];
 }
@@ -65,7 +67,7 @@
 
 -(void)drawCircle:(int)x yCord:(int)y
 {
-    int space = 18;
+    int space = 16;
     int x1 = 100 * x + space;
     int y1 = 100 * y + space;
     NSRect rc;
@@ -79,9 +81,9 @@
 
 -(void)drawChess:(int)type xCord:(int)x yCord:(int)y
 {
-    if (type)
+    if (type == 1)
         [self drawCross:x yCord:y];
-    else
+    else if(type == -1)
         [self drawCircle:x yCord:y];
 }
 
