@@ -12,10 +12,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSArray *temp = @[@1, @-1, @0, @0, @0, @0, @0, @0, @0];
-    self.array = [NSMutableArray arrayWithArray:temp];
+    self.array = [[NSMutableArray alloc] initWithCapacity:9];
     self.board.array = self.array;
-    [self.board setNeedsDisplay: YES];
+    [self restartPressed: nil];
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
