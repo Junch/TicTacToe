@@ -19,6 +19,8 @@
 		BF8C60FA18533BC20021756B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF8C60F818533BC20021756B /* InfoPlist.strings */; };
 		BF8C60FC18533BC20021756B /* TicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8C60FB18533BC20021756B /* TicTacToeTests.m */; };
 		BF8C610718533C960021756B /* TTTBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8C610618533C960021756B /* TTTBoard.m */; };
+		BF8EC71A18544761003FFF71 /* Game.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF8EC71818544761003FFF71 /* Game.mm */; };
+		BF8EC71D18544D72003FFF71 /* GameTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF8EC71B18544D72003FFF71 /* GameTests.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,9 @@
 		BF8C60FB18533BC20021756B /* TicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeTests.m; sourceTree = "<group>"; };
 		BF8C610518533C960021756B /* TTTBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTBoard.h; sourceTree = "<group>"; };
 		BF8C610618533C960021756B /* TTTBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTBoard.m; sourceTree = "<group>"; };
+		BF8EC71818544761003FFF71 /* Game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Game.mm; sourceTree = "<group>"; };
+		BF8EC71918544761003FFF71 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		BF8EC71B18544D72003FFF71 /* GameTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameTests.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +123,8 @@
 		BF8C60D718533BC20021756B /* TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				BF8EC71818544761003FFF71 /* Game.mm */,
+				BF8EC71918544761003FFF71 /* Game.h */,
 				BF8C60E318533BC20021756B /* TTTAppDelegate.h */,
 				BF8C60E418533BC20021756B /* TTTAppDelegate.m */,
 				BF8C610518533C960021756B /* TTTBoard.h */,
@@ -145,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				BF8C60FB18533BC20021756B /* TicTacToeTests.m */,
+				BF8EC71B18544D72003FFF71 /* GameTests.mm */,
 				BF8C60F618533BC20021756B /* Supporting Files */,
 			);
 			path = TicTacToeTests;
@@ -261,6 +269,7 @@
 				BF8C60DE18533BC20021756B /* main.m in Sources */,
 				BF8C610718533C960021756B /* TTTBoard.m in Sources */,
 				BF8C60E518533BC20021756B /* TTTAppDelegate.m in Sources */,
+				BF8EC71A18544761003FFF71 /* Game.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF8C60FC18533BC20021756B /* TicTacToeTests.m in Sources */,
+				BF8EC71D18544D72003FFF71 /* GameTests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +481,7 @@
 				BF8C610118533BC20021756B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BF8C610218533BC20021756B /* Build configuration list for PBXNativeTarget "TicTacToeTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +490,7 @@
 				BF8C610418533BC20021756B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
