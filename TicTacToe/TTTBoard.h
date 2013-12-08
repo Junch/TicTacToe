@@ -14,6 +14,6 @@
 
 -(void)drawChess:(int)type xCord:(int)x yCord:(int)y;
 
-@property (weak) NSArray* array;
+@property (weak) NSMutableArray* array;
 
 @end

@@ -87,4 +87,18 @@
         [self drawCircle:x yCord:y];
 }
 
+-(void)mouseDown:(NSEvent *)theEvent
+{
+    NSPoint pntInWindow = [theEvent locationInWindow];
+    NSPoint pntInView   = [self convertPoint:pntInWindow fromView:nil];
+
+    int i= (int)pntInView.x / 100;
+    int j= (int)pntInView.y / 100;
+    NSLog(@"x=%.2f y=%.2f i=%d j=%d\n", pntInView.x, pntInView.y, i, j);
+    
+    int k = j*3+i;
+    self.array[k] = [NSNumber numberWithInt:1];
+    [self setNeedsDisplay:YES];
+}
+
 @end
