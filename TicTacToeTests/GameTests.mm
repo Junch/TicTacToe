@@ -111,8 +111,8 @@ Game *game;
 {
     char buffer[] = "...ox.x.o";
     game->init(buffer);
-    // beta实际上确定了返回值的上限
-    // 如果计算alpha倒推值太大，那么可能发生剪枝，直接就返回了
+    // beta实际上确定了返回值的一个界限
+    // 如果计算alpha倒推值太大(alpha>=beta)，那么可能发生剪枝，直接就返回了
     int alpha= game->minimax(1, 1, 0, -INF, 0);
     XCTAssertEqual(0, alpha);
 }
