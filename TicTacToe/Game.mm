@@ -28,6 +28,7 @@ void Game::print()
 
 void Game::init(char buffer[])
 {
+    chess = 0;
     int i,j;
     for (int k=0; k<SIZE*SIZE; k++) {
         i=k/SIZE;
@@ -38,26 +39,47 @@ void Game::init(char buffer[])
     }
 }
 
-void Game::init(NSMutableArray* array)
+void Game::import(NSMutableArray* array)
 {
+    chess = 0;
     assert([array count] >=9);
     for (int i=0; i<[array count]; i++) {
-        int x = i/3;
-        int y = i%3;
+        int x = i%3;
+        int y = 2 - i/3;
         int val = [array[i] intValue];
         if (val == 0)
-            board[x][y] = '.';
-        else if(val==1)
-            board[x][y] = 'x';
-        else if(val==-1)
-            board[x][y]= 'o';
+            board[y][x] = '.';
+        else if(val==1){
+            board[y][x] = 'x';
+            ++chess;
+        }
+        else if(val==-1){
+            board[y][x]= 'o';
+            --chess;
+        }
         else
             assert(!"Unknown values");
     }
 }
 
-void Game::setMultablArray(NSMutableArray* array)
+void Game::output(NSMutableArray* array)
 {
+    for (int y=0; y<3;y++) {
+        for (int x=0; x<3; x++) {
+            char c = board[y][x];
+            int k=(2-y)*3 + x;
+            
+            if (c=='.')
+                array[k] = [NSNumber numberWithInt:0];
+            else if(c=='x')
+                array[k] = [NSNumber numberWithInt:1];
+            else if(c=='o')
+                array[k] = [NSNumber numberWithInt:-1];
+            else
+                assert(!"Unknown values");
+        }
+        
+    }
     
 }
 
@@ -191,4 +213,51 @@ bool Game::solve(int& x, int& y)
     }
     
     return false;
+}
+
+void Game::circleResponse(int& x, int& y)
+{
+    int xx=-1;
+    int yy=-1;
+    
+    int xxx=-1;
+    int yyy=-1;
+    
+    int beta = INF;
+    for (int i=0; i<SIZE; i++) {
+        for (int j=0; j<SIZE; j++) {
+            if (board[i][j] == '.') {
+                board[i][j] = 'o';
+                chess++;
+                int score = minimax(1, i, j, -INF, beta);
+                board[i][j] = '.';
+                chess--;
+                
+                if (score < beta)
+                    beta = score;
+                if (score == -INF){
+                    x = j;
+                    y = i;
+                    return;
+                }
+                else if(score == 0){
+                    xx = j;
+                    yy = i;
+                }
+                else {
+                    xxx = j;
+                    yyy = i;
+                }
+            }
+        }
+    }
+    
+    if (xx != -1) {
+        x = xx;
+        y = yy;
+    }
+    else{
+        x = xxx;
+        y = yyy;
+    }
 }

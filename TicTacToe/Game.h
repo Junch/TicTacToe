@@ -17,12 +17,13 @@ class Game {
 public:
     Game();
     void init(char buffer[]);
-    void init(NSMutableArray* array);
-    void setMultablArray(NSMutableArray* array);
+    void import(NSMutableArray* array);
+    void output(NSMutableArray* array);
     void print();
     bool over(int x, int y);
     int  minimax(int type, int x, int y, int alpha, int beta);
     bool solve(int& x, int& y);
+    void circleResponse(int& x, int& y);
     
 private:
     char board[3][3];

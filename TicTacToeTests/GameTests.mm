@@ -67,14 +67,51 @@ Game *game;
     XCTAssertEqual(-INF, alpha);
 }
 
-- (void)testInit
+- (void)testImport
 {
     NSArray* tmp = @[@1,@-1,@0,@0,@0,@0,@0,@0,@0];
     
     NSMutableArray* arr = [NSMutableArray arrayWithArray: tmp];
-    game->init(arr);
+    game->import(arr);
     game->print();
 }
 
+- (void)testOutput
+{
+    char buffer[] = "..oxxx...";
+    game->init(buffer);
+    //NSMutableArray* arr = [[NSMutableArray alloc] init];
+    NSMutableArray* arr = [NSMutableArray arrayWithCapacity:9];
+    for (int i=0; i<9; ++i) {
+        [arr addObject: [NSNull null]];
+    }
+
+    game->output(arr);
+    XCTAssertEqual(0, [arr[0] intValue]);
+    XCTAssertEqual(1, [arr[3] intValue]);
+    XCTAssertEqual(1, [arr[4] intValue]);
+    XCTAssertEqual(1, [arr[5] intValue]);
+    XCTAssertEqual(-1, [arr[8] intValue]);
+}
+
+- (void)testCircleResonse
+{
+    char buffer[] = "o.oxx.x..";
+    game->init(buffer);
+    int x, y;
+    game->circleResponse(x, y);
+    XCTAssertEqual(1, x);
+    XCTAssertEqual(0, y);
+}
+
+- (void)testCircleResonse2
+{
+    char buffer[] = "ox.ox....";
+    game->init(buffer);
+    int x, y;
+    game->circleResponse(x, y);
+    XCTAssertEqual(0, x);
+    XCTAssertEqual(2, y);
+}
 
 @end

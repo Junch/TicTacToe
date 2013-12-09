@@ -7,8 +7,28 @@
 //
 
 #import "TTTBoard.h"
+#import "TTTAppDelegate.h"
 
 @implementation TTTBoard
+
+//- (id)initWithFrame:(NSRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    
+//    [self addObserver:self forKeyPath:@"array"
+//               options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+//               context:NULL];
+//    
+//    return self;
+//}
+//
+//-(void)observeValueForKeyPath:(NSString *)keyPath
+//                     ofObject:(id)object
+//                       change:(NSDictionary *)change
+//                      context:(void *)context{
+//    NSLog(@"%@",keyPath);
+//    NSLog(@"%@",change);
+//}
 
 -(void)drawRect:(NSRect)dirtyRect
 {
@@ -98,9 +118,13 @@
     
     int k = j*3+i;
     
+    
+   TTTAppDelegate* delegate = [[NSApplication sharedApplication] delegate];
+    
     if ([self.array[k] intValue] == 0) {
+        [delegate willChangeValueForKey:@"array"];
         self.array[k] = [NSNumber numberWithInt:1];
-        [self setNeedsDisplay:YES];
+        [delegate didChangeValueForKey:@"array"];
     }
 }
 
