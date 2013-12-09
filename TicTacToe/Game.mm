@@ -55,7 +55,7 @@ void Game::import(NSMutableArray* array)
         }
         else if(val==-1){
             board[y][x]= 'o';
-            --chess;
+            ++chess;
         }
         else
             assert(!"Unknown values");
@@ -149,6 +149,7 @@ int Game::minimax(int type, int x, int y, int alpha, int beta)
         return 0;
     
     if (type) { // MAX Node
+        alpha = -INF; // This line cannot be removed
         for (int i=0; i<SIZE; i++) {
             for (int j=0; j<SIZE; j++) {
                 if (board[i][j] == '.') {
@@ -169,6 +170,7 @@ int Game::minimax(int type, int x, int y, int alpha, int beta)
         return alpha;
     }
     else{ // MIN Node
+        beta = INF; // This line cannot be removed
         for (int i=0; i<SIZE; i++) {
             for (int j=0; j<SIZE; j++) {
                 if (board[i][j] == '.') {
@@ -217,11 +219,10 @@ bool Game::solve(int& x, int& y)
 
 void Game::circleResponse(int& x, int& y)
 {
-    int xx=-1;
-    int yy=-1;
-    
-    int xxx=-1;
-    int yyy=-1;
+    //Opponent may win
+    int x0 = -1;
+    int y0 = -1;
+    bool bFirstEven = true;
     
     int beta = INF;
     for (int i=0; i<SIZE; i++) {
@@ -240,24 +241,28 @@ void Game::circleResponse(int& x, int& y)
                     y = i;
                     return;
                 }
-                else if(score == 0){
-                    xx = j;
-                    yy = i;
+                else if(score == 0 && bFirstEven){
+                    // Need to consider the alpha-beta prune
+                    // If the returned score==0, it is possible that it is a bad answer, that it has been given up.
+                    // Just remember the first time the score is set to 0.
+                    x0 = j;
+                    y0 = i;
+                    bFirstEven = false;
                 }
-                else {
-                    xxx = j;
-                    yyy = i;
+                else if(score == INF){
+                    
                 }
             }
         }
     }
     
-    if (xx != -1) {
-        x = xx;
-        y = yy;
+    if (x0 != -1) {
+        x = x0;
+        y = y0;
     }
-    else{
-        x = xxx;
-        y = yyy;
+    else // circle may fail no matter what he will do
+    {
+        x = -1;
+        y = -1;
     }
 }

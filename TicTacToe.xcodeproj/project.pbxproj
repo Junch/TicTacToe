@@ -11,7 +11,7 @@
 		BF8C60DC18533BC20021756B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF8C60DA18533BC20021756B /* InfoPlist.strings */; };
 		BF8C60DE18533BC20021756B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8C60DD18533BC20021756B /* main.m */; };
 		BF8C60E218533BC20021756B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF8C60E018533BC20021756B /* Credits.rtf */; };
-		BF8C60E518533BC20021756B /* TTTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8C60E418533BC20021756B /* TTTAppDelegate.m */; };
+		BF8C60E518533BC20021756B /* TTTAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF8C60E418533BC20021756B /* TTTAppDelegate.mm */; };
 		BF8C60E818533BC20021756B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8C60E618533BC20021756B /* MainMenu.xib */; };
 		BF8C60EA18533BC20021756B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF8C60E918533BC20021756B /* Images.xcassets */; };
 		BF8C60F118533BC20021756B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF8C60F018533BC20021756B /* XCTest.framework */; };
@@ -45,7 +45,7 @@
 		BF8C60DF18533BC20021756B /* TicTacToe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TicTacToe-Prefix.pch"; sourceTree = "<group>"; };
 		BF8C60E118533BC20021756B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		BF8C60E318533BC20021756B /* TTTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTTAppDelegate.h; sourceTree = "<group>"; };
-		BF8C60E418533BC20021756B /* TTTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTTAppDelegate.m; sourceTree = "<group>"; };
+		BF8C60E418533BC20021756B /* TTTAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TTTAppDelegate.mm; sourceTree = "<group>"; };
 		BF8C60E718533BC20021756B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		BF8C60E918533BC20021756B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BF8C60EF18533BC20021756B /* TicTacToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +126,7 @@
 				BF8EC71818544761003FFF71 /* Game.mm */,
 				BF8EC71918544761003FFF71 /* Game.h */,
 				BF8C60E318533BC20021756B /* TTTAppDelegate.h */,
-				BF8C60E418533BC20021756B /* TTTAppDelegate.m */,
+				BF8C60E418533BC20021756B /* TTTAppDelegate.mm */,
 				BF8C610518533C960021756B /* TTTBoard.h */,
 				BF8C610618533C960021756B /* TTTBoard.m */,
 				BF8C60E618533BC20021756B /* MainMenu.xib */,
@@ -268,7 +268,7 @@
 			files = (
 				BF8C60DE18533BC20021756B /* main.m in Sources */,
 				BF8C610718533C960021756B /* TTTBoard.m in Sources */,
-				BF8C60E518533BC20021756B /* TTTAppDelegate.m in Sources */,
+				BF8C60E518533BC20021756B /* TTTAppDelegate.mm in Sources */,
 				BF8EC71A18544761003FFF71 /* Game.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
