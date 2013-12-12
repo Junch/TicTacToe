@@ -35,26 +35,26 @@ Game *game;
 - (void)testOver
 {
     char buffer[] = "..oxxx...";
-    game->import(buffer);
-    XCTAssertTrue(game->over(1,0));
+    game->setChess(buffer);
+    XCTAssertTrue(game->over(0,1));
     
     char buffer2[] = ".oxooo...";
-    game->import(buffer2);
-    XCTAssertTrue(game->over(1,0), "The x player should fail");
+    game->setChess(buffer2);
+    XCTAssertTrue(game->over(0,1), "The x player should fail");
     
     char buffer3[] = "x...x...x";
-    game->import(buffer3);
+    game->setChess(buffer3);
     XCTAssertTrue(game->over(0,0));
     
     char buffer4[] = "..x.x.x..";
-    game->import(buffer4);
+    game->setChess(buffer4);
     XCTAssertTrue(game->over(0,2));
 }
 
 - (void)testMinimax_win
 {
     char buffer[]="xx..o.o..";
-    game->import(buffer);
+    game->setChess(buffer);
     int alpha = game->minimax(1, -1, -1, -INF, INF);
     XCTAssertEqual(INF, alpha);
 }
@@ -62,7 +62,7 @@ Game *game;
 - (void)testMinimax_fail
 {
     char buffer[]="x..o.o..";
-    game->import(buffer);
+    game->setChess(buffer);
     int alpha = game->minimax(0, -1, -1, -INF, INF);
     XCTAssertEqual(-INF, alpha);
 }
@@ -70,7 +70,7 @@ Game *game;
 - (void)testMinimax_1
 {
     char buffer[] = "x........";
-    game->import(buffer);
+    game->setChess(buffer);
     int beta= game->minimax(0, -1, -1, -INF, INF);
     XCTAssertEqual(0, beta);
 }
@@ -78,7 +78,7 @@ Game *game;
 - (void)testMinimax_2
 {
     char buffer[] = "x.....o..";
-    game->import(buffer);
+    game->setChess(buffer);
     int alpha= game->minimax(1, 2, 0, -INF, INF);
     XCTAssertEqual(INF, alpha);
 }
@@ -86,7 +86,7 @@ Game *game;
 - (void)testMinimax_3
 {
     char buffer[] = "x.....o..";
-    game->import(buffer);
+    game->setChess(buffer);
     int alpha= game->minimax(1, 2, 0, -INF, 0);
     XCTAssertEqual(INF, alpha);
 }
@@ -94,7 +94,7 @@ Game *game;
 - (void)testMinimax_4
 {
     char buffer[] = "....x.x.o";
-    game->import(buffer);
+    game->setChess(buffer);
     int beta= game->minimax(0, 2, 0, -INF, INF);
     XCTAssertEqual(0, beta);
 }
@@ -102,7 +102,7 @@ Game *game;
 - (void)testMinimax_5
 {
     char buffer[] = "...ox.x.o";
-    game->import(buffer);
+    game->setChess(buffer);
     int alpha= game->minimax(1, 1, 0, -INF, INF);
     XCTAssertEqual(INF, alpha);
 }
@@ -110,7 +110,7 @@ Game *game;
 - (void)testMinimax_6
 {
     char buffer[] = "...ox.x.o";
-    game->import(buffer);
+    game->setChess(buffer);
     // beta实际上确定了返回值的一个界限
     // 如果计算alpha倒推值太大(alpha>=beta)，那么可能发生剪枝，直接就返回了
     int alpha= game->minimax(1, 1, 0, -INF, 0);
@@ -120,10 +120,10 @@ Game *game;
 - (void)testOutput2
 {
     char buffer[] = "..oxxx...";
-    game->import(buffer);
+    game->setChess(buffer);
 
     char buffer2[9];
-    game->output(buffer2);
+    game->chess(buffer2);
     
     XCTAssertTrue(0 == strncmp(buffer, buffer2, 9));
 }
@@ -131,7 +131,7 @@ Game *game;
 - (void)testCircleResonse
 {
     char buffer[] = "o.oxx.x..";
-    game->import(buffer);
+    game->setChess(buffer);
     int x, y;
     game->circleResponse(x, y);
     XCTAssertEqual(1, x);
@@ -141,21 +141,24 @@ Game *game;
 - (void)testCircleResonse2
 {
     char buffer[] = "ox.ox....";
-    game->import(buffer);
+    game->setChess(buffer);
     int x, y;
     game->circleResponse(x, y);
     XCTAssertEqual(0, x);
     XCTAssertEqual(2, y);
 }
 
-//- (void)testCircleResonse3
-//{
-//    char buffer[] = "...x..x.o";
-//    game->init(buffer);
-//    int x, y;
-//    game->circleResponse(x, y);
-//    XCTAssertEqual(0, x);
-//    XCTAssertEqual(0, y);
-//}
+- (void)testCircleResonse3
+{
+    char buffer[] = "...x..x.o";
+    game->setChess(buffer);
+    int x, y;
+    game->circleResponse(x, y);
+    
+    // AI found no matter what he will do, he will fail
+    // if his opponent is not mad.
+    XCTAssertEqual(-1, x);
+    XCTAssertEqual(-1, y);
+}
 
 @end

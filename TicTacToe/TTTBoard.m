@@ -118,8 +118,7 @@
     
     int k = j*3+i;
     
-    
-   TTTAppDelegate* delegate = [[NSApplication sharedApplication] delegate];
+    TTTAppDelegate* delegate = [[NSApplication sharedApplication] delegate];
     
     if ([self.array[k] intValue] == 0) {
         [delegate willChangeValueForKey:@"array"];

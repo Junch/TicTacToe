@@ -10,7 +10,7 @@
 #include <cassert>
 #define SIZE 3
 
-Game::Game():chess(0)
+Game::Game():step(0)
 {
     ::memset(board, '.',sizeof(board));
 }
@@ -26,20 +26,20 @@ void Game::print()
     }
 }
 
-void Game::import(char buffer[])
+void Game::setChess(char buffer[])
 {
-    chess = 0;
+    step = 0;
     int i,j;
     for (int k=0; k<SIZE*SIZE; k++) {
         i=k/SIZE;
         j=k%SIZE;
         board[i][j]=buffer[k];
         if (buffer[k] == 'x' || buffer[k] == 'o')
-            ++chess;
+            ++step;
     }
 }
 
-void Game::output(char buffer[])
+void Game::chess(char buffer[])
 {
     int i,j;
     for (int k=0; k<SIZE*SIZE; k++) {
@@ -49,6 +49,26 @@ void Game::output(char buffer[])
     }
 }
 
+void Game::setChess(char c, int x, int y)
+{
+    assert(c=='x' || c=='o' || c=='.');
+    if (c!='x' && c!='o' && c!='.')
+        return;
+
+    bool isBlank = (board[y][x] == '.');
+    if ((c=='x' || c=='o') && isBlank)
+        ++step;
+    else if(c=='.' && !isBlank)
+        --step;
+    
+    board[y][x]=c;
+}
+
+char Game::chess(int x, int y)
+{
+    return board[y][x];
+}
+
 bool Game::over(int x, int y)
 {
     if (x==-1 && y==-1) // During initialization
@@ -56,9 +76,9 @@ bool Game::over(int x, int y)
     
     int k=0;
     for (int i=0; i<SIZE; i++) {
-        if (board[i][y] == 'x')
+        if (board[y][i] == 'x')
             ++k;
-        else if(board[i][y] == 'o')
+        else if(board[y][i] == 'o')
             --k;
     }
     
@@ -67,9 +87,9 @@ bool Game::over(int x, int y)
     
     k=0;
     for (int i=0; i<SIZE; i++) {
-        if (board[x][i] == 'x')
+        if (board[i][x] == 'x')
             ++k;
-        else if(board[x][i] == 'o')
+        else if(board[i][x] == 'o')
             --k;
     }
     
@@ -111,7 +131,7 @@ int Game::minimax(int type, int x, int y, int alpha, int beta)
     if (over(x, y)) // Game is over
         return type==1? -INF:INF;
     
-    if (chess == SIZE*SIZE) // No winner
+    if (step == SIZE*SIZE) // No winner
         return 0;
     
     if (type) { // MAX Node
@@ -120,10 +140,10 @@ int Game::minimax(int type, int x, int y, int alpha, int beta)
             for (int j=0; j<SIZE; j++) {
                 if (board[i][j] == '.') {
                     board[i][j] = 'x';
-                    ++chess;
-                    int score = minimax(0, i, j, alpha, beta);
+                    ++step;
+                    int score = minimax(0, j, i, alpha, beta);
                     board[i][j] = '.';
-                    --chess;
+                    --step;
                     
                     if (score > alpha)
                         alpha = score;
@@ -141,10 +161,10 @@ int Game::minimax(int type, int x, int y, int alpha, int beta)
             for (int j=0; j<SIZE; j++) {
                 if (board[i][j] == '.') {
                     board[i][j] = 'o';
-                    ++chess;
-                    int score = minimax(1, i, j, alpha, beta);
+                    ++step;
+                    int score = minimax(1, j, i, alpha, beta);
                     board[i][j] = '.';
-                    --chess;
+                    --step;
                     
                     if (score < beta)
                         beta = score;
@@ -164,16 +184,16 @@ bool Game::solve(int& x, int& y)
         for (int j=0; j<SIZE; j++) {
             if (board[i][j] == '.') {
                 board[i][j] = 'x';
-                chess++;
-                int score = minimax(0, i, j, alpha, INF);
+                step++;
+                int score = minimax(0, j, i, alpha, INF);
                 board[i][j] = '.';
-                chess--;
+                step--;
                 
                 if (score > alpha)
                     alpha = score;
                 if (alpha == INF){
-                    x = i;
-                    y = j;
+                    x = j;
+                    y = i;
                     return true;
                 }
             }
@@ -195,10 +215,10 @@ void Game::circleResponse(int& x, int& y)
         for (int j=0; j<SIZE; j++) {
             if (board[i][j] == '.') {
                 board[i][j] = 'o';
-                chess++;
-                int score = minimax(1, i, j, -INF, beta);
+                step++;
+                int score = minimax(1, j, i, -INF, beta);
                 board[i][j] = '.';
-                chess--;
+                step--;
                 
                 if (score < beta)
                     beta = score;

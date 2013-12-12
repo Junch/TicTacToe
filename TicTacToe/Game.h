@@ -15,8 +15,11 @@
 class Game {
 public:
     Game();
-    void import(char buffer[]);
-    void output(char buffer[]);
+    void setChess(char buffer[]);
+    void chess(char buffer[]);
+    void setChess(char c, int x, int y);
+    char chess(int x, int y);
+    
     void print();
     bool over(int x, int y);
     int  minimax(int type, int x, int y, int alpha, int beta);
@@ -25,7 +28,7 @@ public:
     
 private:
     char board[3][3];
-    int  chess;
+    int  step;
 };
 
 #endif /* defined(__TicTacToe__Game__) */

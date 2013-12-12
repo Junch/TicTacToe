@@ -56,11 +56,20 @@ Game* game;
         if (x!=-1) {
             int k=(2-y)*3 + x;
             self.array[k] = [NSNumber numberWithInt:-1];
+            
+            game->setChess('o', x, y);
+            if (game->over(x, y)) {
+                NSBeep();
+            }
 
             [self.board setNeedsDisplay: YES];
         }
         else
             NSLog(@"Cannot find good solution!\n");
+        
+        if (game->over(x, y)){
+            NSBeep();
+        }
     }
 }
 
@@ -86,7 +95,7 @@ Game* game;
             assert(!"Unknown values");
     }
     
-    game->import(buffer);
+    game->setChess(buffer);
 }
 
 @end
