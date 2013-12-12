@@ -26,7 +26,7 @@ void Game::print()
     }
 }
 
-void Game::init(char buffer[])
+void Game::import(char buffer[])
 {
     chess = 0;
     int i,j;
@@ -39,48 +39,14 @@ void Game::init(char buffer[])
     }
 }
 
-void Game::import(NSMutableArray* array)
+void Game::output(char buffer[])
 {
-    chess = 0;
-    assert([array count] >=9);
-    for (int i=0; i<[array count]; i++) {
-        int x = i%3;
-        int y = 2 - i/3;
-        int val = [array[i] intValue];
-        if (val == 0)
-            board[y][x] = '.';
-        else if(val==1){
-            board[y][x] = 'x';
-            ++chess;
-        }
-        else if(val==-1){
-            board[y][x]= 'o';
-            ++chess;
-        }
-        else
-            assert(!"Unknown values");
+    int i,j;
+    for (int k=0; k<SIZE*SIZE; k++) {
+        i=k/SIZE;
+        j=k%SIZE;
+        buffer[k] = board[i][j];
     }
-}
-
-void Game::output(NSMutableArray* array)
-{
-    for (int y=0; y<3;y++) {
-        for (int x=0; x<3; x++) {
-            char c = board[y][x];
-            int k=(2-y)*3 + x;
-            
-            if (c=='.')
-                array[k] = [NSNumber numberWithInt:0];
-            else if(c=='x')
-                array[k] = [NSNumber numberWithInt:1];
-            else if(c=='o')
-                array[k] = [NSNumber numberWithInt:-1];
-            else
-                assert(!"Unknown values");
-        }
-        
-    }
-    
 }
 
 bool Game::over(int x, int y)

@@ -10,15 +10,13 @@
 #define __TicTacToe__Game__
 
 #include <iostream>
-#import <Cocoa/Cocoa.h>
 #define INF 100000
 
 class Game {
 public:
     Game();
-    void init(char buffer[]);
-    void import(NSMutableArray* array);
-    void output(NSMutableArray* array);
+    void import(char buffer[]);
+    void output(char buffer[]);
     void print();
     bool over(int x, int y);
     int  minimax(int type, int x, int y, int alpha, int beta);
