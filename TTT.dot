@@ -1,0 +1,17 @@
+digraph G {   
+    node[shape=record]   
+
+    {rank=same;TTTAppDelegate;Game}
+    
+    TTTAppDelegate[label="{TTTAppDelegate| -array : NSMutableArray\l| -game : Game\l| |-observeValueForKeyPath()\l}"]
+    Game[label="{Game|\l| -setChess()\l| -circleResponse()}"]
+    NSMutableArray[label="{NSMutableArray|\l}"]
+    TTTBoard[label="{TTTBoard| -array : NSMutableArray\l| | -drawRect()\l| -mouseDown()\l}"]
+
+    edge[ arrowhead="diamond", style="filled"]
+    Game -> TTTAppDelegate
+    NSMutableArray ->TTTAppDelegate;
+
+    edge[ arrowhead="vee", style=""]
+    TTTBoard -> NSMutableArray [constraint=false];
+}
