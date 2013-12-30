@@ -1,0 +1,29 @@
+digraph G {   
+    node[shape=record
+         fontname = "Bitstream Vera Sans"
+         fontsize = 10
+         style = "filled"
+         color = "black"
+         /*fillcolor = "khaki1"*/
+         fillcolor = "#fafad2"
+    ]
+
+    edge[shape=record
+         fontname = "Bitstream Vera Sans"
+         fontsize = 8
+    ]
+   
+    TTTAppDelegate[label="{TTTAppDelegate|-array : NSMutableArray\l-game : Game\l|-observeValueForKeyPath()\l}"]
+    Game[label="{Game||-setChess()\l-circleResponse()\l}"]
+    NSMutableArray[label="{NSMutableArray|}"]
+    TTTBoard[label="{TTTBoard|-array : NSMutableArray\l|-drawRect()\l-mouseDown()\l}"];
+
+    {rank=same;TTTAppDelegate;Game}
+    {rank=max;NSMutableArray;TTTBoard}
+
+    edge[ arrowhead="diamond" taillabel="1"]
+    Game -> TTTAppDelegate
+    NSMutableArray ->TTTAppDelegate;
+
+    TTTBoard -> NSMutableArray [arrowhead="vee" taillabel="" constraint=false];
+}
